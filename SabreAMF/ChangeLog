@@ -1,0 +1,13 @@
+SabreAMF 1.3 - 2009-06-27
+	* Fixed: Issue 6: Invalid command operation 12
+	* Fixed: AMF3 deserialization improvements on 64bit machines and various
+	other bugs (thanks Asbjorn)
+	* Fixed: Issue 11: AMF0 array reference bugs fixed
+	* Fixed: AMF0 classmapping bugs 
+	* Fixed: Bug in recordset object notation
+	* New: If invalid AMF is received, we send back a more specific
+	exception (thanks Asbjorn)
+	* New: Drupal integration module (separate download) (thanks Ionut)
+
+Older:
+	* Changelogs to follow, if anyone is interested
