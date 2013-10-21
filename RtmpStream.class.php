@@ -1,7 +1,7 @@
 <?php
 class RtmpStream
 {
-	private $_index;
+	private $_index = 0;
 	private $_data;
 	
 	public function __construct($data = "")
