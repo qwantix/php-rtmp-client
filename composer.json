@@ -1,0 +1,15 @@
+{
+    "name": "qwantix/php-rtmp-client",
+    "type": "library",
+    "description": "A Rtmp client for PHP",
+    "authors": [
+        {
+            "name": "Brice Dauzats",
+            "email": "qwantix@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.0.0"
+    },
+    "license": "GPL-v3"
+}
