@@ -1,19 +1,19 @@
 <?php
 
-    require_once 'SabreAMF/AMF0/Serializer.php'; 
-    require_once 'SabreAMF/AMF0/Deserializer.php'; 
-    require_once 'SabreAMF/Const.php';
-    require_once 'SabreAMF/AMF3/Wrapper.php';
+    require_once dirname(__FILE__) . '/AMF0/Serializer.php';
+    require_once dirname(__FILE__) . '/AMF0/Deserializer.php';
+    require_once dirname(__FILE__) . '/Const.php';
+    require_once dirname(__FILE__) . '/AMF3/Wrapper.php';
 
     /**
-     * SabreAMF_Message 
-     * 
+     * SabreAMF_Message
+     *
      * The Message class encapsulates either an entire request package or an entire result package; including an AMF enveloppe
-     * 
-     * @package SabreAMF 
+     *
+     * @package SabreAMF
      * @version $Id: Message.php 233 2009-06-27 23:10:34Z evertpot $
      * @copyright Copyright (C) 2006-2009 Rooftop Solutions. All rights reserved.
-     * @author Evert Pot (http://www.rooftopsolutions.nl/) 
+     * @author Evert Pot (http://www.rooftopsolutions.nl/)
      * @licence http://www.freebsd.org/copyright/license.html  BSD License (4 Clause)
      * @uses SabreAMF_AMF0_Serializer
      * @uses SabreAMF_AMF0_Deserializer
@@ -27,32 +27,32 @@
          */
         private $clientType=0;
         /**
-         * bodies 
-         * 
+         * bodies
+         *
          * @var array
          */
         private $bodies=array();
         /**
-         * headers 
-         * 
+         * headers
+         *
          * @var array
          */
         private $headers=array();
 
         /**
-         * encoding 
-         * 
-         * @var int 
+         * encoding
+         *
+         * @var int
          */
         private $encoding = SabreAMF_Const::AMF0;
 
         /**
-         * serialize 
-         * 
+         * serialize
+         *
          * This method serializes a request. It requires an SabreAMF_OutputStream as an argument to read
          * the AMF Data from. After serialization the Outputstream will contain the encoded AMF data.
-         * 
-         * @param SabreAMF_OutputStream $stream 
+         *
+         * @param SabreAMF_OutputStream $stream
          * @return void
          */
         public function serialize(SabreAMF_OutputStream $stream) {
@@ -61,7 +61,7 @@
             $stream->writeByte(0x00);
             $stream->writeByte($this->encoding);
             $stream->writeInt(count($this->headers));
-            
+
             foreach($this->headers as $header) {
 
                 $serializer = new SabreAMF_AMF0_Serializer($stream);
@@ -79,7 +79,7 @@
                 $serializer->writeString($body['target']);
                 $serializer->writeString($body['response']);
                 $stream->writeLong(-1);
-                
+
                 switch($this->encoding) {
 
                     case SabreAMF_Const::AMF0 :
@@ -96,12 +96,12 @@
         }
 
         /**
-         * deserialize 
-         * 
+         * deserialize
+         *
          * This method deserializes a request. It requires an SabreAMF_InputStream with valid AMF data. After
          * deserialization the contents of the request can be found through the getBodies and getHeaders methods
          *
-         * @param SabreAMF_InputStream $stream 
+         * @param SabreAMF_InputStream $stream
          * @return void
          */
         public function deserialize(SabreAMF_InputStream $stream) {
@@ -112,7 +112,7 @@
             $this->InputStream = $stream;
 
             $stream->readByte();
-          
+
             $this->clientType = $stream->readByte();
 
             $deserializer = new SabreAMF_AMF0_Deserializer($stream);
@@ -127,10 +127,10 @@
                 );
                 $stream->readLong();
                 $header['data']  = $deserializer->readAMFData(null,true);
-                $this->headers[] = $header;    
+                $this->headers[] = $header;
 
             }
- 
+
             $totalBodies = $stream->readInt();
 
             for($i=0;$i<$totalBodies;$i++) {
@@ -149,7 +149,7 @@
                     'length'   => $stream->readLong(),
                     'data'     => $deserializer->readAMFData(null,true)
                 );
-         
+
                 if (is_object($body['data']) && $body['data'] instanceof SabreAMF_AMF3_Wrapper) {
                      $body['data'] = $body['data']->getData();
                      $this->encoding = SabreAMF_Const::AMF3;
@@ -158,7 +158,7 @@
                      $this->encoding = SabreAMF_Const::AMF3;
                 }
 
-                $this->bodies[] = $body;    
+                $this->bodies[] = $body;
 
             }
 
@@ -166,11 +166,11 @@
         }
 
         /**
-         * getClientType 
-         * 
+         * getClientType
+         *
          * Returns the ClientType for the request. Check SabreAMF_Const for possible (known) values
-         * 
-         * @return int 
+         *
+         * @return int
          */
         public function getClientType() {
 
@@ -179,11 +179,11 @@
         }
 
         /**
-         * getBodies 
-         * 
+         * getBodies
+         *
          * Returns the bodies int the message
-         * 
-         * @return array 
+         *
+         * @return array
          */
         public function getBodies() {
 
@@ -192,11 +192,11 @@
         }
 
         /**
-         * getHeaders 
-         * 
+         * getHeaders
+         *
          * Returns the headers in the message
-         * 
-         * @return array 
+         *
+         * @return array
          */
         public function getHeaders() {
 
@@ -205,12 +205,12 @@
         }
 
         /**
-         * addBody 
+         * addBody
          *
          * Adds a body to the message
-         * 
-         * @param mixed $body 
-         * @return void 
+         *
+         * @param mixed $body
+         * @return void
          */
         public function addBody($body) {
 
@@ -219,11 +219,11 @@
         }
 
         /**
-         * addHeader 
-         * 
+         * addHeader
+         *
          * Adds a message header
-         * 
-         * @param mixed $header 
+         *
+         * @param mixed $header
          * @return void
          */
         public function addHeader($header) {
@@ -233,9 +233,9 @@
         }
 
         /**
-         * setEncoding 
-         * 
-         * @param int $encoding 
+         * setEncoding
+         *
+         * @param int $encoding
          * @return void
          */
         public function setEncoding($encoding) {
@@ -245,13 +245,13 @@
         }
 
         /**
-         * getEncoding 
-         * 
-         * @return int 
+         * getEncoding
+         *
+         * @return int
          */
         public function getEncoding() {
 
-            return $this->encoding; 
+            return $this->encoding;
 
         }
 

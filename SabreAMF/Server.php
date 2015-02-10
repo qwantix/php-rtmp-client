@@ -1,21 +1,21 @@
 <?php
 
-    require_once 'SabreAMF/OutputStream.php';
-    require_once 'SabreAMF/InputStream.php';
-    require_once 'SabreAMF/Message.php';
-    require_once 'SabreAMF/Const.php';
-    require_once 'SabreAMF/InvalidAMFException.php';
- 
+    require_once dirname(__FILE__) . '/OutputStream.php';
+    require_once dirname(__FILE__) . '/InputStream.php';
+    require_once dirname(__FILE__) . '/Message.php';
+    require_once dirname(__FILE__) . '/Const.php';
+    require_once dirname(__FILE__) . '/InvalidAMFException.php';
+
 
     /**
      * AMF Server
-     * 
-     * This is the AMF0/AMF3 Server class. Use this class to construct a gateway for clients to connect to 
-     * 
-     * @package SabreAMF 
+     *
+     * This is the AMF0/AMF3 Server class. Use this class to construct a gateway for clients to connect to
+     *
+     * @package SabreAMF
      * @version $Id: Server.php 233 2009-06-27 23:10:34Z evertpot $
      * @copyright Copyright (C) 2006-2009 Rooftop Solutions. All rights reserved.
-     * @author Evert Pot (http://www.rooftopsolutions.nl/) 
+     * @author Evert Pot (http://www.rooftopsolutions.nl/)
      * @licence http://www.freebsd.org/copyright/license.html  BSD License (4 Clause)
      * @uses SabreAMF_OutputStream
      * @uses SabreAMF_InputStream
@@ -26,49 +26,49 @@
     class SabreAMF_Server {
 
         /**
-         * amfInputStream 
-         * 
-         * @var SabreAMF_InputStream 
+         * amfInputStream
+         *
+         * @var SabreAMF_InputStream
          */
         protected $amfInputStream;
         /**
-         * amfOutputStream 
-         * 
-         * @var SabreAMF_OutputStream 
+         * amfOutputStream
+         *
+         * @var SabreAMF_OutputStream
          */
         protected $amfOutputStream;
 
         /**
          * The representation of the AMF request
-         * 
-         * @var SabreAMF_Message 
+         *
+         * @var SabreAMF_Message
          */
         protected $amfRequest;
 
         /**
          * The representation of the AMF response
-         * 
-         * @var SabreAMF_Message 
+         *
+         * @var SabreAMF_Message
          */
         protected $amfResponse;
 
         /**
          * Input stream to read the AMF from
-         * 
-         * @var SabreAMF_Message 
+         *
+         * @var SabreAMF_Message
          */
         static protected $dataInputStream = 'php://input';
 
         /**
          * Input string to read the AMF from
-         * 
-         * @var SabreAMF_Message 
+         *
+         * @var SabreAMF_Message
          */
         static protected $dataInputData = '';
 
         /**
-         * __construct 
-         * 
+         * __construct
+         *
          * @return void
          */
         public function __construct() {
@@ -78,21 +78,21 @@
             //file_put_contents($dump.'/' . md5($data),$data);
 
             $this->amfInputStream = new SabreAMF_InputStream($data);
-           
+
             $this->amfRequest = new SabreAMF_Message();
             $this->amfOutputStream = new SabreAMF_OutputStream();
             $this->amfResponse = new SabreAMF_Message();
-            
+
             $this->amfRequest->deserialize($this->amfInputStream);
 
         }
 
         /**
-         * getRequests 
-         * 
+         * getRequests
+         *
          * Returns the requests that are made to the gateway.
-         * 
-         * @return array 
+         *
+         * @return array
          */
         public function getRequests() {
 
@@ -101,10 +101,10 @@
         }
 
         /**
-         * setResponse 
-         * 
+         * setResponse
+         *
          * Send a response back to the client (based on a request you got through getRequests)
-         * 
+         *
          * @param string $target This parameter should contain the same as the 'response' item you got through getRequests. This connects the request to the response
          * @param int $responsetype Set as either SabreAMF_Const::R_RESULT or SabreAMF_Const::R_STATUS, depending on if the call succeeded or an error was produced
          * @param mixed $data The result data
@@ -130,10 +130,10 @@
         }
 
         /**
-         * sendResponse 
+         * sendResponse
          *
          * Sends the responses back to the client. Call this after you answered all the requests with setResponse
-         * 
+         *
          * @return void
          */
         public function sendResponse() {
@@ -146,13 +146,13 @@
         }
 
         /**
-         * addHeader 
+         * addHeader
          *
          * Add a header to the server response
-         * 
-         * @param string $name 
-         * @param bool $required 
-         * @param mixed $data 
+         *
+         * @param string $name
+         * @param bool $required
+         * @param mixed $data
          * @return void
          */
         public function addHeader($name,$required,$data) {
@@ -169,7 +169,7 @@
          * @return void
          */
         public function getRequestHeaders() {
-            
+
             return $this->amfRequest->getHeaders();
 
         }

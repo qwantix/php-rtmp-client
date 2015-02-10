@@ -1,26 +1,26 @@
 <?php
 
-    require_once 'SabreAMF/Server.php';
-    require_once 'SabreAMF/AMF3/AbstractMessage.php';
-    require_once 'SabreAMF/AMF3/AcknowledgeMessage.php';
-    require_once 'SabreAMF/AMF3/RemotingMessage.php';
-    require_once 'SabreAMF/AMF3/CommandMessage.php';
-    require_once 'SabreAMF/AMF3/ErrorMessage.php';
-    require_once 'SabreAMF/DetailException.php';
+    require_once dirname(__FILE__) . '/Server.php';
+    require_once dirname(__FILE__) . '/AMF3/AbstractMessage.php';
+    require_once dirname(__FILE__) . '/AMF3/AcknowledgeMessage.php';
+    require_once dirname(__FILE__) . '/AMF3/RemotingMessage.php';
+    require_once dirname(__FILE__) . '/AMF3/CommandMessage.php';
+    require_once dirname(__FILE__) . '/AMF3/ErrorMessage.php';
+    require_once dirname(__FILE__) . '/DetailException.php';
 
     /**
      * AMF Server
-     * 
-     * This is the AMF0/AMF3 Server class. Use this class to construct a gateway for clients to connect to 
+     *
+     * This is the AMF0/AMF3 Server class. Use this class to construct a gateway for clients to connect to
      *
      * The difference between this server class and the regular server, is that this server is aware of the
      * AMF3 Messaging system, and there is no need to manually construct the AcknowledgeMessage classes.
      * Also, the response to the ping message will be done for you.
-     * 
-     * @package SabreAMF 
+     *
+     * @package SabreAMF
      * @version $Id: CallbackServer.php 233 2009-06-27 23:10:34Z evertpot $
      * @copyright Copyright (C) 2006-2009 Rooftop Solutions. All rights reserved.
-     * @author Evert Pot (http://www.rooftopsolutions.nl/) 
+     * @author Evert Pot (http://www.rooftopsolutions.nl/)
      * @licence http://www.freebsd.org/copyright/license.html  BSD License (4 Clause)
      * @uses SabreAMF_Server
      * @uses SabreAMF_Message
@@ -29,24 +29,24 @@
     class SabreAMF_CallbackServer extends SabreAMF_Server {
 
         /**
-         * Assign this callback to handle method-calls 
+         * Assign this callback to handle method-calls
          *
          * @var callback
          */
         public $onInvokeService;
 
         /**
-         * Assign this callback to handle authentication requests 
-         * 
-         * @var callback 
+         * Assign this callback to handle authentication requests
+         *
+         * @var callback
          */
         public $onAuthenticate;
 
         /**
-         * handleCommandMessage 
-         * 
-         * @param SabreAMF_AMF3_CommandMessage $request 
-         * @return Sabre_AMF3_AbstractMessage 
+         * handleCommandMessage
+         *
+         * @param SabreAMF_AMF3_CommandMessage $request
+         * @return Sabre_AMF3_AbstractMessage
          */
         private function handleCommandMessage(SabreAMF_AMF3_CommandMessage $request) {
 
@@ -78,10 +78,10 @@
         }
 
         /**
-         * authenticate 
-         * 
-         * @param string $username 
-         * @param string $password 
+         * authenticate
+         *
+         * @param string $username
+         * @param string $password
          * @return void
          */
         protected function authenticate($username,$password) {
@@ -93,12 +93,12 @@
         }
 
         /**
-         * invokeService 
-         * 
-         * @param string $service 
-         * @param string $method 
-         * @param array $data 
-         * @return mixed 
+         * invokeService
+         *
+         * @param string $service
+         * @param string $method
+         * @param array $data
+         * @return mixed
          */
         protected function invokeService($service,$method,$data) {
 
@@ -113,7 +113,7 @@
 
         /**
          * exec
-         * 
+         *
          * @return void
          */
         public function exec() {
@@ -148,13 +148,13 @@
 
                     // See if we are dealing with the AMF3 messaging system
                     if (is_object($request['data']) && $request['data'] instanceof SabreAMF_AMF3_AbstractMessage) {
-            
+
                         $AMFVersion = 3;
-                       
+
                         // See if we are dealing with a CommandMessage
                         if ($request['data'] instanceof SabreAMF_AMF3_CommandMessage) {
 
-                            // Handle the command message 
+                            // Handle the command message
                             $response = $this->handleCommandMessage($request['data']);
                         }
 
@@ -172,7 +172,7 @@
                         // We are dealing with AMF0
                         $service = substr($request['target'],0,strrpos($request['target'],'.'));
                         $method  = substr(strrchr($request['target'],'.'),1);
-                        
+
                         $response = $this->invokeService($service,$method,$request['data']);
 
                     }
@@ -195,7 +195,7 @@
                             $response = array(
                                 'description' => $e->getMessage(),
                                 'detail'      => $detail,
-                                'line'        => $e->getLine(), 
+                                'line'        => $e->getLine(),
                                 'code'        => $e->getCode()?$e->getCode():get_class($e),
                             );
                             break;

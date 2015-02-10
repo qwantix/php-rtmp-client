@@ -1,20 +1,20 @@
 <?php
 
-    require_once 'SabreAMF/AMF3/Const.php';
-    require_once 'SabreAMF/Const.php';
-    require_once 'SabreAMF/Serializer.php';
-    require_once 'SabreAMF/AMF3/Serializer.php';
-    require_once 'SabreAMF/AMF3/Wrapper.php';
-    require_once 'SabreAMF/ITypedObject.php';
+    require_once dirname(__FILE__) . '/../AMF3/Const.php';
+    require_once dirname(__FILE__) . '/../Const.php';
+    require_once dirname(__FILE__) . '/../Serializer.php';
+    require_once dirname(__FILE__) . '/../AMF3/Serializer.php';
+    require_once dirname(__FILE__) . '/../AMF3/Wrapper.php';
+    require_once dirname(__FILE__) . '/../ITypedObject.php';
 
     /**
-     * SabreAMF_AMF0_Serializer 
-     * 
+     * SabreAMF_AMF0_Serializer
+     *
      * @package SabreAMF
      * @subpackage AMF0
      * @version $Id: Serializer.php 233 2009-06-27 23:10:34Z evertpot $
      * @copyright Copyright (C) 2006-2009 Rooftop Solutions. All rights reserved.
-     * @author Evert Pot (http://www.rooftopsolutions.nl/) 
+     * @author Evert Pot (http://www.rooftopsolutions.nl/)
      * @licence http://www.freebsd.org/copyright/license.html  BSD License (4 Clause)
      * @uses SabreAMF_Const
      * @uses SabreAMF_AMF0_Const
@@ -25,11 +25,11 @@
     class SabreAMF_AMF0_Serializer extends SabreAMF_Serializer {
 
         /**
-         * writeAMFData 
-         * 
-         * @param mixed $data 
-         * @param int $forcetype 
-         * @return mixed 
+         * writeAMFData
+         *
+         * @param mixed $data
+         * @param int $forcetype
+         * @return mixed
          */
         public function writeAMFData($data,$forcetype=null) {
 
@@ -111,15 +111,15 @@
                 case SabreAMF_AMF0_Const::DT_TYPEDOBJECT : return $this->writeTypedObject($data);
                 case SabreAMF_AMF0_Const::DT_AMF3        : return $this->writeAMF3Data($data);
                 default                   :  throw new Exception('Unsupported type: ' . gettype($data)); return false;
- 
+
            }
 
         }
 
         /**
-         * writeMixedArray 
-         * 
-         * @param array $data 
+         * writeMixedArray
+         *
+         * @param array $data
          * @return void
          */
         public function writeMixedArray($data) {
@@ -135,9 +135,9 @@
         }
 
         /**
-         * writeArray 
-         * 
-         * @param array $data 
+         * writeArray
+         *
+         * @param array $data
          * @return void
          */
         public function writeArray($data) {
@@ -157,9 +157,9 @@
         }
 
         /**
-         * writeObject 
-         * 
-         * @param object $data 
+         * writeObject
+         *
+         * @param object $data
          * @return void
          */
         public function writeObject($data) {
@@ -175,9 +175,9 @@
         }
 
         /**
-         * writeString 
-         * 
-         * @param string $string 
+         * writeString
+         *
+         * @param string $string
          * @return void
          */
         public function writeString($string) {
@@ -188,9 +188,9 @@
         }
 
         /**
-         * writeLongString 
-         * 
-         * @param string $string 
+         * writeLongString
+         *
+         * @param string $string
          * @return void
          */
         public function writeLongString($string) {
@@ -200,9 +200,9 @@
 
         }
        /**
-         * writeTypedObject 
-         * 
-         * @param object $data 
+         * writeTypedObject
+         *
+         * @param object $data
          * @return void
          */
         public function writeTypedObject($data) {
@@ -219,10 +219,10 @@
 
 
         /**
-         * writeAMF3Data 
-         * 
-         * @param mixed $data 
-         * @return void 
+         * writeAMF3Data
+         *
+         * @param mixed $data
+         * @return void
          */
         public function writeAMF3Data(SabreAMF_AMF3_Wrapper $data) {
 
@@ -232,9 +232,9 @@
         }
 
         /**
-         * Writes a date object 
-         * 
-         * @param DateTime $data 
+         * Writes a date object
+         *
+         * @param DateTime $data
          * @return void
          */
         public function writeDate(DateTime $data) {

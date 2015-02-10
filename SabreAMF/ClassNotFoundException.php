@@ -2,19 +2,19 @@
 
     /**
      * SabreAMF_ClassNotFoundException
-     * 
+     *
      * @package SabreAMF
      * @version $Id: ClassNotFoundException.php 233 2009-06-27 23:10:34Z evertpot $
      * @copyright Copyright (C) 2006-2009 Rooftop Solutions. All rights reserved.
-     * @author Evert Pot (http://www.rooftopsolutions.nl/) 
+     * @author Evert Pot (http://www.rooftopsolutions.nl/)
      * @author Renaun Erickson (http://renaun.com/blog)
-     * @licence http://www.freebsd.org/copyright/license.html  BSD License (4 Clause) 
+     * @licence http://www.freebsd.org/copyright/license.html  BSD License (4 Clause)
      */
 
     /**
-     * Detailed exception 
+     * Detailed exception
      */
-    require_once 'SabreAMF/DetailException.php';
+    require_once dirname(__FILE__) . '/DetailException.php';
 
     /**
      * This is the receipt for ClassException and default values reflective of ColdFusion RPC faults
