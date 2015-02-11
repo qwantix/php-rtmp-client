@@ -2,18 +2,18 @@
 
     /**
      * SabreAMF_InvalidAMFException
-     * 
+     *
      * @package SabreAMF
      * @version $Id: $
      * @copyright Copyright (C) 2006-2009 Rooftop Solutions. All rights reserved.
      * @author Asbjørn Sloth Tønnesen <asbjorn@lila.io>
-     * @licence http://www.freebsd.org/copyright/license.html  BSD License (4 Clause) 
+     * @licence http://www.freebsd.org/copyright/license.html  BSD License (4 Clause)
      */
 
     /**
-     * Detailed exception 
+     * Detailed exception
      */
-    require_once 'SabreAMF/DetailException.php';
+    require_once dirname(__FILE__) . '/DetailException.php';
 
     /**
      * In valid AMF exception

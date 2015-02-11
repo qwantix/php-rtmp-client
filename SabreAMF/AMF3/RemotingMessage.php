@@ -1,18 +1,18 @@
 <?php
 
     /**
-     * SabreAMF_AMF3_RemotingMessage 
-     * 
+     * SabreAMF_AMF3_RemotingMessage
+     *
      * @uses SabreAMF_AM3_AbstractMessage
      * @package SabreAMF
      * @subpackage AMF3
      * @version $Id: RemotingMessage.php 233 2009-06-27 23:10:34Z evertpot $
      * @copyright Copyright (C) 2006-2009 Rooftop Solutions. All rights reserved.
-     * @author Evert Pot (http://www.rooftopsolutions.nl/) 
-     * @licence http://www.freebsd.org/copyright/license.html  BSD License (4 Clause) 
+     * @author Evert Pot (http://www.rooftopsolutions.nl/)
+     * @licence http://www.freebsd.org/copyright/license.html  BSD License (4 Clause)
      */
 
-    require_once 'SabreAMF/AMF3/AbstractMessage.php';
+    require_once dirname(__FILE__) . '/../AMF3/AbstractMessage.php';
 
     /**
      * Invokes a message on a service
@@ -20,22 +20,22 @@
     class SabreAMF_AMF3_RemotingMessage extends SabreAMF_AMF3_AbstractMessage {
 
         /**
-         * operation 
-         * 
-         * @var string 
+         * operation
+         *
+         * @var string
          */
         public $operation;
 
         /**
-         * source 
-         * 
-         * @var string 
+         * source
+         *
+         * @var string
          */
         public $source;
 
         /**
-         * Creates the object and generates some values 
-         * 
+         * Creates the object and generates some values
+         *
          * @return void
          */
         public function __construct() {

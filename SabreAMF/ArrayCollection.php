@@ -1,11 +1,11 @@
 <?php
 
-    require_once 'SabreAMF/Externalized.php';
+    require_once dirname(__FILE__) . '/Externalized.php';
 
     /**
      * This is the default mapping for the flex.messaging.io.ArrayCollection class
      * It can be accessed using most of the normal array access methods
-     * 
+     *
      * @package SabreAMF
      * @uses SabreAMF_Externalized
      * @uses IteratorAggregate
@@ -13,22 +13,22 @@
      * @uses Countable
      * @version $Id: ArrayCollection.php 233 2009-06-27 23:10:34Z evertpot $
      * @copyright Copyright (C) 2007-2009 Rooftop Solutions. All rights reserved.
-     * @author Evert Pot (http://www.rooftopsolutions.nl) 
+     * @author Evert Pot (http://www.rooftopsolutions.nl)
      * @license licence http://www.freebsd.org/copyright/license.html  BSD License (4 Clause)
      */
     class SabreAMF_ArrayCollection implements SabreAMF_Externalized, IteratorAggregate, ArrayAccess, Countable {
 
         /**
-         * data 
-         * 
-         * @var array 
+         * data
+         *
+         * @var array
          */
-        private $data; 
+        private $data;
 
         /**
-         * Construct this object 
-         * 
-         * @param array $data pass an array here to populate the array collection 
+         * Construct this object
+         *
+         * @param array $data pass an array here to populate the array collection
          * @return void
          */
         function __construct($data = array()) {
@@ -39,9 +39,9 @@
         }
 
         /**
-         * This is used by SabreAMF when this object is unserialized (from AMF3) 
-         * 
-         * @param array $data 
+         * This is used by SabreAMF when this object is unserialized (from AMF3)
+         *
+         * @param array $data
          * @return void
          */
         function readExternal($data) {
@@ -51,9 +51,9 @@
         }
 
         /**
-         * This is used by SabreAMF when this object is serialized 
-         * 
-         * @return array 
+         * This is used by SabreAMF when this object is serialized
+         *
+         * @return array
          */
         function writeExternal() {
 
@@ -62,9 +62,9 @@
         }
 
         /**
-         * implemented from IteratorAggregate 
-         * 
-         * @return ArrayObject 
+         * implemented from IteratorAggregate
+         *
+         * @return ArrayObject
          */
         function getIterator() {
 
@@ -73,10 +73,10 @@
         }
 
         /**
-         * implemented from ArrayAccess 
-         * 
-         * @param mixed $offset 
-         * @return bool 
+         * implemented from ArrayAccess
+         *
+         * @param mixed $offset
+         * @return bool
          */
         function offsetExists($offset) {
 
@@ -85,10 +85,10 @@
         }
 
         /**
-         * Implemented from ArrayAccess 
-         * 
-         * @param mixed $offset 
-         * @return mixed 
+         * Implemented from ArrayAccess
+         *
+         * @param mixed $offset
+         * @return mixed
          */
         function offsetGet($offset) {
 
@@ -97,10 +97,10 @@
         }
 
         /**
-         * Implemented from ArrayAccess 
-         * 
-         * @param mixed $offset 
-         * @param mixed $value 
+         * Implemented from ArrayAccess
+         *
+         * @param mixed $offset
+         * @param mixed $value
          * @return void
          */
         function offsetSet($offset,$value) {
@@ -114,9 +114,9 @@
         }
 
         /**
-         * Implemented from ArrayAccess 
-         * 
-         * @param mixed $offset 
+         * Implemented from ArrayAccess
+         *
+         * @param mixed $offset
          * @return void
          */
         function offsetUnset($offset) {
@@ -126,8 +126,8 @@
         }
 
         /**
-         * Implemented from Countable 
-         * 
+         * Implemented from Countable
+         *
          * @return int
          */
         function count() {

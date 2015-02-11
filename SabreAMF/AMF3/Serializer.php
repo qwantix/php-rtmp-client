@@ -1,19 +1,19 @@
 <?php
 
-    require_once 'SabreAMF/AMF3/Const.php';
-    require_once 'SabreAMF/Const.php';
-    require_once 'SabreAMF/Serializer.php';
-    require_once 'SabreAMF/ITypedObject.php';
-    require_once 'SabreAMF/ByteArray.php';
+    require_once dirname(__FILE__) . '/../AMF3/Const.php';
+    require_once dirname(__FILE__) . '/../Const.php';
+    require_once dirname(__FILE__) . '/../Serializer.php';
+    require_once dirname(__FILE__) . '/../ITypedObject.php';
+    require_once dirname(__FILE__) . '/../ByteArray.php';
 
     /**
-     * SabreAMF_AMF3_Serializer 
-     * 
+     * SabreAMF_AMF3_Serializer
+     *
      * @package SabreAMF
      * @subpackage AMF3
      * @version $Id: Serializer.php 233 2009-06-27 23:10:34Z evertpot $
      * @copyright Copyright (C) 2006-2009 Rooftop Solutions. All rights reserved.
-     * @author Evert Pot (http://www.rooftopsolutions.nl/) 
+     * @author Evert Pot (http://www.rooftopsolutions.nl/)
      * @author Karl von Randow http://xk72.com/
      * @author Develar
      * @licence http://www.freebsd.org/copyright/license.html  BSD License (4 Clause)
@@ -24,11 +24,11 @@
     class SabreAMF_AMF3_Serializer extends SabreAMF_Serializer {
 
         /**
-         * writeAMFData 
-         * 
-         * @param mixed $data 
-         * @param int $forcetype 
-         * @return mixed 
+         * writeAMFData
+         *
+         * @param mixed $data
+         * @param int $forcetype
+         * @return mixed
          */
         public function writeAMFData($data,$forcetype=null) {
 
@@ -50,16 +50,16 @@
                 if (!$type && is_float($data))   $type = SabreAMF_AMF3_Const::DT_NUMBER;
                 if (!$type && is_int($data))     $type = SabreAMF_AMF3_Const::DT_INTEGER;
                 if (!$type && is_string($data))  $type = SabreAMF_AMF3_Const::DT_STRING;
-                if (!$type && is_array($data))   $type = SabreAMF_AMF3_Const::DT_ARRAY; 
+                if (!$type && is_array($data))   $type = SabreAMF_AMF3_Const::DT_ARRAY;
                 if (!$type && is_object($data)) {
 
-                    if ($data instanceof SabreAMF_ByteArray) 
+                    if ($data instanceof SabreAMF_ByteArray)
                         $type = SabreAMF_AMF3_Const::DT_BYTEARRAY;
-                    elseif ($data instanceof DateTime) 
+                    elseif ($data instanceof DateTime)
                         $type = SabreAMF_AMF3_Const::DT_DATE;
-                    else 
+                    else
                         $type = SabreAMF_AMF3_Const::DT_OBJECT;
-                    
+
 
                 }
                 if ($type===false) {
@@ -83,22 +83,22 @@
                 case SabreAMF_AMF3_Const::DT_STRING      : $this->writeString($data); break;
                 case SabreAMF_AMF3_Const::DT_DATE        : $this->writeDate($data); break;
                 case SabreAMF_AMF3_Const::DT_ARRAY       : $this->writeArray($data); break;
-                case SabreAMF_AMF3_Const::DT_OBJECT      : $this->writeObject($data); break; 
+                case SabreAMF_AMF3_Const::DT_OBJECT      : $this->writeObject($data); break;
                 case SabreAMF_AMF3_Const::DT_BYTEARRAY   : $this->writeByteArray($data); break;
-                default                   :  throw new Exception('Unsupported type: ' . gettype($data)); return null; 
- 
+                default                   :  throw new Exception('Unsupported type: ' . gettype($data)); return null;
+
            }
 
         }
 
         /**
-         * writeObject 
-         * 
-         * @param mixed $data 
+         * writeObject
+         *
+         * @param mixed $data
          * @return void
          */
         public function writeObject($data) {
-           
+
             $encodingType = SabreAMF_AMF3_Const::ET_PROPLIST;
             if ($data instanceof SabreAMF_ITypedObject) {
 
@@ -107,7 +107,7 @@
 
             } else if (!$classname = $this->getRemoteClassName(get_class($data))) {
 
-                
+
                 $classname = '';
 
             } else {
@@ -161,9 +161,9 @@
         }
 
         /**
-         * writeInt 
-         * 
-         * @param int $int 
+         * writeInt
+         *
+         * @param int $int
          * @return void
          */
         public function writeInt($int) {
@@ -212,9 +212,9 @@
         }
 
         /**
-         * writeString 
-         * 
-         * @param string $str 
+         * writeString
+         *
+         * @param string $str
          * @return void
          */
         public function writeString($str) {
@@ -226,9 +226,9 @@
         }
 
         /**
-         * writeArray 
-         * 
-         * @param array $arr 
+         * writeArray
+         *
+         * @param array $arr
          * @return void
          */
         public function writeArray(array $arr) {
@@ -245,7 +245,7 @@
             unset($arr);
 
             // Writing the length for the numeric keys in the array
-            $arrLen = count($num); 
+            $arrLen = count($num);
             $arrId = ($arrLen << 1) | 0x01;
 
             $this->writeInt($arrId);
@@ -255,17 +255,17 @@
                 $this->writeAMFData($v);
             }
             $this->writeString("");
-           
+
             foreach($num as $v) {
                 $this->writeAMFData($v);
             }
 
         }
-        
+
         /**
-         * Writes a date object 
-         * 
-         * @param DateTime $data 
+         * Writes a date object
+         *
+         * @param DateTime $data
          * @return void
          */
         public function writeDate(DateTime $data) {

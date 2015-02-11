@@ -1,21 +1,21 @@
 <?php
 
     /**
-     * SabreAMF_ClassMapper 
-     * 
-     * @package SabreAMF 
+     * SabreAMF_ClassMapper
+     *
+     * @package SabreAMF
      * @version $Id: ClassMapper.php 233 2009-06-27 23:10:34Z evertpot $
      * @copyright Copyright (C) 2006-2009 Rooftop Solutions. All rights reserved.
-     * @author Evert Pot (http://www.rooftopsolutions.nl/) 
-     * @licence http://www.freebsd.org/copyright/license.html  BSD License (4 Clause) 
+     * @author Evert Pot (http://www.rooftopsolutions.nl/)
+     * @licence http://www.freebsd.org/copyright/license.html  BSD License (4 Clause)
      */
 
-    require_once 'SabreAMF/AMF3/RemotingMessage.php';
-    require_once 'SabreAMF/AMF3/CommandMessage.php';
-    require_once 'SabreAMF/AMF3/AcknowledgeMessage.php';
-    require_once 'SabreAMF/AMF3/ErrorMessage.php';
-    require_once 'SabreAMF/ArrayCollection.php';
-   
+    require_once dirname(__FILE__) . '/AMF3/RemotingMessage.php';
+    require_once dirname(__FILE__) . '/AMF3/CommandMessage.php';
+    require_once dirname(__FILE__) . '/AMF3/AcknowledgeMessage.php';
+    require_once dirname(__FILE__) . '/AMF3/ErrorMessage.php';
+    require_once dirname(__FILE__) . '/ArrayCollection.php';
+
     final class SabreAMF_ClassMapper {
 
         /**
@@ -45,18 +45,18 @@
 
         /**
          * The Constructor
-         * 
+         *
          * We make the constructor private so the class cannot be initialized
-         * 
+         *
          * @return void
          */
         private function __construct() { }
 
         /**
-         * Register a new class to be mapped 
-         * 
-         * @param string $remoteClass 
-         * @param string $localClass 
+         * Register a new class to be mapped
+         *
+         * @param string $remoteClass
+         * @param string $localClass
          * @return void
          */
         static public function registerClass($remoteClass,$localClass) {
@@ -66,12 +66,12 @@
         }
 
         /**
-         * Get the local classname for a remote class 
+         * Get the local classname for a remote class
          *
          * This method will return FALSE when the class is not found
-         * 
-         * @param string $remoteClass 
-         * @return mixed 
+         *
+         * @param string $remoteClass
+         * @return mixed
          */
         static public function getLocalClass($remoteClass) {
 
@@ -94,12 +94,12 @@
         }
 
         /**
-         * Get the remote classname for a local class 
-         * 
+         * Get the remote classname for a local class
+         *
          * This method will return FALSE when the class is not found
-         * 
-         * @param string $localClass 
-         * @return mixed 
+         *
+         * @param string $localClass
+         * @return mixed
          */
         static public function getRemoteClass($localClass) {
 
@@ -114,7 +114,7 @@
             if (!is_string($remoteClass) && $cb) {
                 throw new Exception('Classname received from onGetRemoteClass should be a string or return false. ' . gettype($remoteClass) . ' was returned');
             }
-            return $remoteClass; 
+            return $remoteClass;
 
         }
 

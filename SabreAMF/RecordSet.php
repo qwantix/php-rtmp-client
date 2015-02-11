@@ -1,39 +1,39 @@
 <?php
 
-    require_once 'SabreAMF/ITypedObject.php'; 
- 
+    require_once dirname(__FILE__) . '/ITypedObject.php';
+
     /**
-     * SabreAMF_RecordSet 
-     * 
+     * SabreAMF_RecordSet
+     *
      * @uses SabreAMF_ITypedObject
      * @uses Countable
-     * @package SabreAMF 
+     * @package SabreAMF
      * @version $Id: RecordSet.php 233 2009-06-27 23:10:34Z evertpot $
      * @copyright Copyright (C) 2006-2009 Rooftop Solutions. All rights reserved.
-     * @author Evert Pot (http://www.rooftopsolutions.nl/) 
+     * @author Evert Pot (http://www.rooftopsolutions.nl/)
      * @licence http://www.freebsd.org/copyright/license.html  BSD License (4 Clause)
      */
     abstract class SabreAMF_RecordSet implements SabreAMF_ITypedObject, Countable {
 
 
         /**
-         * getData 
-         * 
-         * @return array 
+         * getData
+         *
+         * @return array
          */
-        abstract public function getData(); 
+        abstract public function getData();
 
         /**
-         * getColumnNames 
-         * 
-         * @return array 
+         * getColumnNames
+         *
+         * @return array
          */
         abstract public function getColumnNames();
 
         /**
-         * getAMFClassName 
-         * 
-         * @return string 
+         * getAMFClassName
+         *
+         * @return string
          */
         final public function getAMFClassName() {
 
@@ -42,9 +42,9 @@
         }
 
         /**
-         * getAMFData 
-         * 
-         * @return object 
+         * getAMFData
+         *
+         * @return object
          */
         public function getAMFData() {
 
